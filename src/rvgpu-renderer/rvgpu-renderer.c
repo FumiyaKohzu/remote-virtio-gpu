@@ -36,6 +36,8 @@
 
 #include <linux/virtio_gpu.h>
 
+int n_loop=0;
+
 static void usage(void)
 {
 	static const char program_name[] = "rvgpu-renderer";
@@ -192,8 +194,11 @@ int main(int argc, char **argv)
 	memset(sp, 0, sizeof(sp));
 	memset(&pp, 0, sizeof(pp));
 
-	while ((opt = getopt(argc, argv, "afhvi:c:s:S:b:B:p:g:")) != -1) {
+	while ((opt = getopt(argc, argv, "afhvi:c:s:S:b:B:p:g:n:")) != -1) {
 		switch (opt) {
+		case 'n':
+			n_loop = atoi(optarg);
+			break;
 		case 'a':
 			translucent = true;
 			break;

@@ -21,8 +21,10 @@
 #include <assert.h>
 #include <err.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include <rvgpu-renderer/renderer/rvgpu-egl.h>
+extern int n_loop;
 
 struct rect {
 	int x;
@@ -163,6 +165,15 @@ void rvgpu_egl_free(struct rvgpu_egl_state *e)
 void rvgpu_egl_draw(struct rvgpu_egl_state *e, struct rvgpu_scanout *s,
 		    bool vsync)
 {
+    int i=0;
+    int sum=0;
+    for (i=0;i<n_loop;i++)
+    {
+        sum += rand();
+    }
+    printf("i=%d\n",i);
+    printf("delay loop random=%d\n",sum);
+        
 	if (!s->native)
 		rvgpu_egl_create_scanout(e, s);
 
